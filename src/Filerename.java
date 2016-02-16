@@ -1,7 +1,7 @@
 import java.io.File;
 
 public class Filerename {
-	static String dir="E:\\[Dymy] Watashi ga Motenai no wa Dou Kangaete mo Omaera ga Warui! 1-10 (BD 1920x1080 x264 FLAC)";
+	static String dir="E:\\[CASO&SumiSora][Henneko][BDRip]1";
 
 	public static void main(String[] args) {
 		File file=new File(dir);
@@ -9,12 +9,16 @@ public class Filerename {
 		String[] videonames=file.list(new ExtensionFilter(".mkv"));
 		String newname="";
 		for (int i = 0; i < subnames.length; i++) {
-			file=new File(subnames[i]);
+			file=new File(dir+"\\"+subnames[i]);
 			newname=videonames[i/2];
 			if (i%2==0) {
-				file.renameTo(new File(newname.replace(".mkv", "jp.ass")));
+				newname=dir+"\\"+newname.replace(".mkv", ".sc.ass");
+				System.out.println(file.renameTo(new File(newname)));
+				System.out.println(newname);
 			} else {
-				file.renameTo(new File(newname.replace(".mkv", "sc.ass")));
+				newname=dir+"\\"+newname.replace(".mkv", ".tc.ass");
+				System.out.println(file.renameTo(new File(newname)));
+				System.out.println(newname);
 			}
 		}
 	}
