@@ -1,8 +1,8 @@
 import java.io.File;
 import java.io.FilenameFilter;
 
-public class SubFilenameFilter implements FilenameFilter {
-	String extension=".ass";
+public class ExtensionFilter implements FilenameFilter {
+	private String extension="";
 	@Override
 	public boolean accept(File dir, String name) {
 		int i=name.lastIndexOf(".");
@@ -15,7 +15,9 @@ public class SubFilenameFilter implements FilenameFilter {
 				return false;
 			}
 		}
-
 	}
-
+	
+	public ExtensionFilter(String ext){
+		this.extension=ext;
+	}
 }
