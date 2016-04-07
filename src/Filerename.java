@@ -1,7 +1,7 @@
 import java.io.File;
 
 public class Filerename {
-	static String dir="E:\\[CASO&SumiSora][Henneko][BDRip]1";
+	static String dir="E:\\[U2-RIP]Saki Achiga Hen Episode of Side-A";
 
 	public static void main(String[] args) {
 		File file=new File(dir);
