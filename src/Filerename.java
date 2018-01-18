@@ -1,11 +1,18 @@
+import java.awt.Color;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
+
+import javax.imageio.ImageIO;
 
 public class Filerename {
-	static String dir="C:\\[VCB-Studio] Kantai Collection [Ma10p_1080p]";
+	static String dir="D:\\train-image";
 	static boolean singlesub=true;
 	
 	public static void main(String[] args) {
-		File file=new File(dir);
+		renameUUID();
+		/*File file=new File(dir);
 		String[] subnames=file.list(new ExtensionFilter(".ass"));
 		String[] videonames=file.list(new ExtensionFilter(".mkv"));
 		String newname="";
@@ -28,7 +35,40 @@ public class Filerename {
 					System.out.println(newname);
 				}
 			}			
+		}*/
+	}
+	
+	public static void renameUUID(){
+		File rootfile=new File(dir);
+		File[] files=rootfile.listFiles();
+		String extname;
+		for (File file : files) {
+			extname=file.getName().substring(file.getName().lastIndexOf(".")+1);
+			System.out.println(extname);
+			if (extname.equals("jpeg")) {
+				extname="jpg";
+				file.renameTo(new File(dir+File.separatorChar+UUID.randomUUID().toString()+"."+extname));
+			} else if (extname.equals("png")) {
+				png2jpg(file);
+			}
+			
 		}
 	}
+	
+	
+	public static void png2jpg(File pngFile) {
+		BufferedImage bufferedImage;
+		try {
+			bufferedImage = ImageIO.read(pngFile);
+			BufferedImage newBufferedImage = new BufferedImage(bufferedImage.getWidth(),bufferedImage.getHeight(), BufferedImage.TYPE_INT_RGB);
+			newBufferedImage.createGraphics().drawImage(bufferedImage, 0, 0, Color.WHITE, null);
+			ImageIO.write(newBufferedImage, "jpg", new File("D:\\pngs\\"+UUID.randomUUID().toString()+".jpg"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+		   
 
 }
